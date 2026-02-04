@@ -1,3 +1,4 @@
+// src/App.jsx
 import Course from './Course'
 
 const App = () => {
