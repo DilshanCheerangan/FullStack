@@ -1,23 +1,28 @@
-import axios from "axios";
+// src/services/persons.js
+import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/persons'
-
+// Use relative URL so it works in dev with proxy
+// and in production when frontend is served by backend
+const baseUrl = '/api/persons'
 
 const getAll = () => {
-  return axios.get(baseUrl)
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
 }
 
 const create = newPerson => {
-  return axios.post(baseUrl, newPerson)
+  const request = axios.post(baseUrl, newPerson)
+  return request.then(response => response.data)
+}
+
+const update = (id, changedPerson) => {
+  const request = axios.put(`${baseUrl}/${id}`, changedPerson)
+  return request.then(response => response.data)
 }
 
 const remove = id => {
-  return axios.delete(`${baseUrl}/${id}`)
+  const request = axios.delete(`${baseUrl}/${id}`)
+  return request.then(response => response.data)
 }
 
-const update = (id, updatedPerson) => {
-  return axios.patch(`${baseUrl}/${id}`, updatedPerson)
-}
-
-export default { getAll, create, remove, update }
-
+export default { getAll, create, update, remove }
